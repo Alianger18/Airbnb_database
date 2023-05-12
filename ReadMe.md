@@ -42,8 +42,8 @@ Then, we'll head on to create the database :
 ```shell
 -- Initiating a new database called "AIRBNB"
 DROP DATABASE IF EXISTS AIRBNB;
-CREATE DATABASE AIRBNB OWNER superuser;
 ```
+
 
 After getting done creating users, we'll create a schema, name it "Main" and 
 create the tables of our database :
@@ -404,6 +404,7 @@ CREATE SCHEMA MAIN
     );
 ```
 
+
 Moving on, we'll grant each user its corresponding privileges : 
 
 a) for the super user:
@@ -411,6 +412,7 @@ a) for the super user:
 -- Setting the database ownership to the administrator
 GRANT ALL PRIVILEGES ON DATABASE AIRBNB TO superuser;
 ```
+
 
 b) for the guest:
 ```shell 
@@ -435,6 +437,7 @@ GRANT SELECT, INSERT ON TABLE main.properties_fees TO guest;
 GRANT SELECT, INSERT ON TABLE main.property_images TO guest;
 ```
 
+
 c) for the host:
 ```shell 
 -- Granting the corresponding privileges on tables to the host user
@@ -457,6 +460,7 @@ GRANT SELECT, INSERT ON TABLE main.guests TO host;
 GRANT SELECT, INSERT ON TABLE main.guests_reviews TO host;
 GRANT SELECT, INSERT ON TABLE main.reservations TO host;
 ```
+
 
 Seeking to optimize data retrieval and sorting, indexes were created : 
 
@@ -494,6 +498,7 @@ CREATE INDEX reservations_property_id_index ON main.reservations (property_id);
 CREATE INDEX reservations_guest_id_index ON main.reservations (guest_id);
 ```
 
+
  ii) for data sorting :
 ``` shell
 -- Indexes created for columns frequently GROUP BY clause
@@ -509,15 +514,16 @@ CREATE INDEX properties_property_type_index ON main.properties (property_type);
 CREATE INDEX properties_rented_place_index ON main.properties (rented_place);
 CREATE INDEX reservations_confirmed_index ON main.reservations (confirmed);
 ```
+
+
 All of the statements mentioned before are located in the 'main.sql' file.
+
 
 ## Inserting th sample data
 
-Please find below the rephrased statement:
-
 The provided data is not real and is intended for testing purposes only. 
-The data is available in the form of a multi-row insert statement, run 
-the command in your PostgreSQL terminal.
+The data is available in the form of a multi-row insert statement, you 
+can run the command in your PostgreSQL terminal.
 
 ```shell 
 \i data_insertion.sql
@@ -548,6 +554,7 @@ GROUP BY C.first_name, C.last_name, A.received_hosts_requests, B.received_guests
 ORDER BY total_requests DESC;
  ```
 
+
 #### Find the deals in Morocco
 ```shell 
 SELECT A.property_name, B.address_line, C.city, C.country, C.continent
@@ -560,6 +567,7 @@ FROM (SELECT property_id, property_name, address_id
 WHERE country = 'Morocco'
 ORDER BY C.city;
 ```
+
 
 #### Find accommodation in Asia for you and your pet
 ```shell 
@@ -586,3 +594,4 @@ feature requests, and code improvements.
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
