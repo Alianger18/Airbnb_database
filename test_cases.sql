@@ -37,3 +37,25 @@ FROM (SELECT revenue_id, total_per_booking, booking_id
          JOIN (SELECT property_id, property_name FROM main.properties)
     AS D ON C.property_id = D.property_id
 ORDER BY A.total_per_booking DESC;
+
+-- Test N°4
+UPDATE main.properties
+SET property_name = 'Riyad BARBOU'
+WHERE property_id = 29;
+SELECT property_id
+FROM main.properties
+WHERE properties.property_name LIKE 'Riyad BARBOU';
+
+-- Test N°5
+DELETE
+FROM main.hosts
+WHERE host_id = 1;
+SELECT *
+FROM main.hosts
+WHERE host_id = 1;
+
+INSERT INTO main.hosts (first_name, last_name, email, phone_number, host_type, host_status)
+VALUES ('Alfred', 'Edinburgh', 'Alfred.bruge@example.com', '+123-789-4561', 'Individual', 'Regular');
+SELECT *
+FROM hosts
+WHERE first_name LIKE 'Alfred';

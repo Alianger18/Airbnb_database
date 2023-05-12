@@ -1,3 +1,7 @@
+-- Initiating a new database called "AIRBNB"
+DROP DATABASE IF EXISTS AIRBNB;
+CREATE DATABASE AIRBNB;
+
 -- Creating Users
 DROP USER IF EXISTS superuser;
 CREATE USER superuser WITH PASSWORD 'superuser007';
@@ -8,13 +12,9 @@ CREATE USER guest WITH PASSWORD 'guest321';
 DROP USER IF EXISTS host;
 CREATE USER host WITH PASSWORD 'host123';
 
--- Initiating a new database called "AIRBNB"
-DROP DATABASE IF EXISTS AIRBNB;
-CREATE DATABASE AIRBNB OWNER superuser;
-
-
 -- Creating a new schema called "Main"
-CREATE SCHEMA MAIN
+DROP SCHEMA IF EXISTS main;
+CREATE SCHEMA main
 
     CREATE TABLE HOSTS
     (
@@ -367,7 +367,7 @@ CREATE SCHEMA MAIN
             ON DELETE CASCADE ON UPDATE CASCADE
     );
 
--- Setting the database ownership to the administrator
+-- Setting the database ownership to the superuser
 GRANT ALL PRIVILEGES ON DATABASE AIRBNB TO superuser;
 
 -- Granting the corresponding privileges on tables to the guest user
