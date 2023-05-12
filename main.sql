@@ -441,7 +441,7 @@ CREATE INDEX property_images_property_id_index ON main.property_images (property
 CREATE INDEX reservations_property_id_index ON main.reservations (property_id);
 CREATE INDEX reservations_guest_id_index ON main.reservations (guest_id);
 
--- -- Indexes created for columns frequently GROUP BY clause
+-- Indexes created for columns frequently GROUP BY clause
 CREATE INDEX cities_country_index ON main.cities (country);
 CREATE INDEX cities_continent_index ON main.cities (continent);
 CREATE INDEX guests_reviews_ranking_index ON main.guests_reviews (ranking);
