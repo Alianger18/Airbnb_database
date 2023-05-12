@@ -458,6 +458,57 @@ GRANT SELECT, INSERT ON TABLE main.guests_reviews TO host;
 GRANT SELECT, INSERT ON TABLE main.reservations TO host;
 ```
 
+Seeking to optimize data retrieval and sorting, indexes were created : 
+
+ i) for data retrieval :
+```shell
+-- Creating Indexes for the database
+-- Indexes created for columns frequently queried and used in JOIN or WHERE clauses
+CREATE INDEX beds_and_rooms_property_id_index ON main.beds_and_rooms (property_id);
+CREATE INDEX bookings_confirmation_reservations_id_index ON main.bookings_confirmation (reservation_id);
+CREATE INDEX bookings_history_guest_review_id_index ON main.bookings_history (guest_review_id);
+CREATE INDEX bookings_history_host_review_id_index ON main.bookings_history (host_review_id);
+CREATE INDEX bookings_history_booking_id_index ON main.bookings_history (booking_id);
+CREATE INDEX conversations_guest_id_index ON main.conversations (guest_id);
+CREATE INDEX conversations_host_id_index ON main.conversations (host_id);
+CREATE INDEX guests_mailbox_conversation_id_index ON main.guests_mailbox (conversation_id);
+CREATE INDEX guests_payments_booking_id_index ON main.guests_payments (booking_id);
+CREATE INDEX guests_reviews_guest_id_index ON main.guests_reviews (guest_id);
+CREATE INDEX guests_support_requests_guest_id_index ON main.guests_support_requests (guest_id);
+CREATE INDEX guests_support_requests_admin_id_index ON main.guests_support_requests (admin_id);
+CREATE INDEX hosts_languages_host_id_index ON main.hosts_languages (host_id);
+CREATE INDEX hosts_mailbox_conversation_id_index ON main.hosts_mailbox (conversation_id);
+CREATE INDEX hosts_payout_booking_id_index ON main.hosts_payout (booking_id);
+CREATE INDEX hosts_reviews_host_id_index ON main.hosts_reviews (host_id);
+CREATE INDEX hosts_support_requests_host_id_index ON main.hosts_support_requests (host_id);
+CREATE INDEX hosts_support_requests_admin_id_index ON main.hosts_support_requests (admin_id);
+CREATE INDEX platform_revenue_booking_id_index ON main.platform_revenue (booking_id);
+CREATE INDEX properties_address_id_index ON main.properties (address_id);
+CREATE INDEX properties_host_id_index ON main.properties (host_id);
+CREATE INDEX properties_capacities_property_id_index ON main.properties_capacities (property_id);
+CREATE INDEX properties_essentials_property_id_index ON main.properties_essentials (property_id);
+CREATE INDEX properties_features_property_id_index ON main.properties_features (property_id);
+CREATE INDEX properties_fees_property_id_index ON main.properties_fees (property_id);
+CREATE INDEX property_images_property_id_index ON main.property_images (property_id);
+CREATE INDEX reservations_property_id_index ON main.reservations (property_id);
+CREATE INDEX reservations_guest_id_index ON main.reservations (guest_id);
+```
+
+ ii) for data sorting :
+``` shell
+-- Indexes created for columns frequently GROUP BY clause
+CREATE INDEX cities_country_index ON main.cities (country);
+CREATE INDEX cities_continent_index ON main.cities (continent);
+CREATE INDEX guests_reviews_ranking_index ON main.guests_reviews (ranking);
+CREATE INDEX guests_support_requests_request_object_index ON main.guests_support_requests (request_object);
+CREATE INDEX hosts_host_type_index ON main.hosts (host_type);
+CREATE INDEX hosts_host_status_index ON main.hosts (host_status);
+CREATE INDEX hosts_reviews_ranking_index ON main.hosts_reviews (ranking);
+CREATE INDEX hosts_support_requests_request_object_index ON main.hosts_support_requests (request_object);
+CREATE INDEX properties_property_type_index ON main.properties (property_type);
+CREATE INDEX properties_rented_place_index ON main.properties (rented_place);
+CREATE INDEX reservations_confirmed_index ON main.reservations (confirmed);
+```
 All of the statements mentioned before are located in the 'main.sql' file.
 
 ## Inserting th sample data
